@@ -1,0 +1,169 @@
+{
+  "playlists": [
+    {
+      "id": "pl_1",
+      "name": "Daily Juice",
+      "description": "Your daily picks of bouncy, juicy tracks.",
+      "coverUrl": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=500&q=80",
+      "ownerName": "Songify",
+      "totalTracks": 5,
+      "tracks": [
+        {
+          "id": "tr_1",
+          "title": "Blinding Lights",
+          "artist": "The Weeknd",
+          "albumName": "After Hours",
+          "albumArtUrl": "https://images.unsplash.com/photo-1493225457124-a1a2a5f5286b?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1493225457124-a1a2a5f5286b?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 200000
+        },
+        {
+          "id": "tr_2",
+          "title": "Levitating",
+          "artist": "Dua Lipa",
+          "albumName": "Future Nostalgia",
+          "albumArtUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 203000
+        },
+        {
+          "id": "tr_3",
+          "title": "As It Was",
+          "artist": "Harry Styles",
+          "albumName": "Harry's House",
+          "albumArtUrl": "https://images.unsplash.com/photo-1598387181032-a3103a2cd5b3?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1598387181032-a3103a2cd5b3?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 167000
+        },
+        {
+          "id": "tr_4",
+          "title": "Cruel Summer",
+          "artist": "Taylor Swift",
+          "albumName": "Lover",
+          "albumArtUrl": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 178000
+        },
+        {
+          "id": "tr_5",
+          "title": "Starboy",
+          "artist": "The Weeknd",
+          "albumName": "Starboy",
+          "albumArtUrl": "https://images.unsplash.com/photo-1502444330042-d1a1ddf971b1?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1502444330042-d1a1ddf971b1?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 230000
+        }
+      ]
+    },
+    {
+      "id": "pl_2",
+      "name": "Night Drive",
+      "description": "Synthwave vibes for the midnight cruise.",
+      "coverUrl": "https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&w=500&q=80",
+      "ownerName": "Songify",
+      "totalTracks": 5,
+      "tracks": [
+        {
+          "id": "tr_6",
+          "title": "Midnight City",
+          "artist": "M83",
+          "albumName": "Hurry Up, We're Dreaming",
+          "albumArtUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 243000
+        },
+        {
+          "id": "tr_7",
+          "title": "Nightcall",
+          "artist": "Kavinsky",
+          "albumName": "OutRun",
+          "albumArtUrl": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 259000
+        },
+        {
+          "id": "tr_8",
+          "title": "Resonance",
+          "artist": "HOME",
+          "albumName": "Odyssey",
+          "albumArtUrl": "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 212000
+        },
+        {
+          "id": "tr_9",
+          "title": "A Real Hero",
+          "artist": "College",
+          "albumName": "Heritage",
+          "albumArtUrl": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 267000
+        },
+        {
+          "id": "tr_10",
+          "title": "Tech Noir",
+          "artist": "Gunship",
+          "albumName": "Gunship",
+          "albumArtUrl": "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 303000
+        }
+      ]
+    },
+    {
+      "id": "pl_3",
+      "name": "Lofi Beats",
+      "description": "Chill beats to relax and study to.",
+      "coverUrl": "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=500&q=80",
+      "ownerName": "Songify",
+      "totalTracks": 5,
+      "tracks": [
+        {
+          "id": "tr_11",
+          "title": "Snowman",
+          "artist": "WYS",
+          "albumName": "1 A.M Study Session",
+          "albumArtUrl": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 195000
+        },
+        {
+          "id": "tr_12",
+          "title": "Affection",
+          "artist": "Jinsang",
+          "albumName": "Life",
+          "albumArtUrl": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 142000
+        },
+        {
+          "id": "tr_13",
+          "title": "Space cadet",
+          "artist": "Metro",
+          "albumName": "Space",
+          "albumArtUrl": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 180000
+        },
+        {
+          "id": "tr_14",
+          "title": "I'll keep you safe",
+          "artist": "sagun",
+          "albumName": "I'll keep you safe",
+          "albumArtUrl": "https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 160000
+        },
+        {
+          "id": "tr_15",
+          "title": "Daydreaming",
+          "artist": "Kudo",
+          "albumName": "Vibes",
+          "albumArtUrl": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=500&q=80",
+          "albumArtSmall": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=64&q=80",
+          "durationMs": 210000
+        }
+      ]
+    }
+  ]
+}

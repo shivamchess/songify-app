@@ -62,3 +62,4 @@ flutter:
     - assets/images/
     - assets/fonts/
     - assets/python/
+    - assets/data/

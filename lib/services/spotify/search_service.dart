@@ -1,53 +1,26 @@
-import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../core/constants/api_constants.dart';
 import '../../models/track.dart';
-import 'spotify_auth_service.dart';
+import 'spotify_api_service.dart';
 
 part 'search_service.g.dart';
 
 @riverpod
 SearchService searchService(Ref ref) {
   return SearchService(
-    dio: ref.read(dioProvider),
-    authService: ref.read(spotifyAuthServiceProvider),
+    apiService: ref.read(spotifyApiServiceProvider),
   );
 }
 
 /// Service dedicated to search operations, isolated for cleaner architecture.
+/// Now routes through the local mock API service to bypass Spotify Premium.
 class SearchService {
-  SearchService({required this.dio, required this.authService});
+  SearchService({required this.apiService});
 
-  final Dio dio;
-  final SpotifyAuthService authService;
+  final SpotifyApiService apiService;
 
-  Future<Options> _authHeaders() async {
-    final token = await authService.getToken();
-    return Options(headers: {'Authorization': 'Bearer $token'});
-  }
-
-  /// Live Search Suggestion Engine endpoint.
-  /// Hits https://api.spotify.com/v1/search with q={user_input}&type=track,artist&limit=5
+  /// Live Search Suggestion Engine endpoint using local mock data.
   Future<List<Track>> fetchSearchSuggestions(String query) async {
-    if (query.trim().isEmpty) return [];
-    
-    final opts = await _authHeaders();
-    final res = await dio.get(
-      '${ApiConstants.spotifyBaseUrl}/search',
-      queryParameters: {
-        'q': query,
-        'type': 'track,artist',
-        'limit': 5,
-      },
-      options: opts,
-    );
-    
-    // Parse the track results as they perfectly map to our UI requirements
-    // (thumbnail, title, artist name).
-    final trackItems = res.data['tracks']['items'] as List;
-    return trackItems
-        .whereType<Map<String, dynamic>>()
-        .map(Track.fromSpotify)
-        .toList();
+    // Just re-use the searchTracks logic which now filters the local JSON
+    return apiService.searchTracks(query, limit: 5);
   }
 }

@@ -1,106 +1,77 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../core/constants/api_constants.dart';
 import '../../models/playlist.dart';
 import '../../models/track.dart';
-import 'spotify_auth_service.dart';
 
 part 'spotify_api_service.g.dart';
 
 @riverpod
 SpotifyApiService spotifyApiService(Ref ref) {
-  return SpotifyApiService(
-    dio: ref.read(dioProvider),
-    authService: ref.read(spotifyAuthServiceProvider),
-  );
+  return SpotifyApiService();
 }
 
-/// Wraps all Spotify Web API calls.
-/// Auth token injection is handled automatically.
+/// Wraps all API calls. Now uses local JSON mocks to bypass Spotify Premium requirement.
 class SpotifyApiService {
-  SpotifyApiService({required this.dio, required this.authService});
+  SpotifyApiService();
 
-  final Dio dio;
-  final SpotifyAuthService authService;
-
-  // ---------------------------------------------------------------------------
-
-  Future<Options> _authHeaders() async {
-    final token = await authService.getToken();
-    return Options(headers: {'Authorization': 'Bearer $token'});
+  Future<Map<String, dynamic>> _loadMockData() async {
+    final jsonStr = await rootBundle.loadString('assets/data/mock_playlists.json');
+    return jsonDecode(jsonStr) as Map<String, dynamic>;
   }
 
-  // ── Playlists ───────────────────────────────────────────────────────────────
-
-  /// Fetch Spotify's curated featured playlists.
+  /// Fetch curated featured playlists from local mock.
   Future<List<Playlist>> fetchFeaturedPlaylists({int limit = 20}) async {
-    final opts = await _authHeaders();
-    final res = await dio.get(
-      '${ApiConstants.spotifyBaseUrl}/browse/featured-playlists',
-      queryParameters: {'limit': limit},
-      options: opts,
-    );
-    final items = res.data['playlists']['items'] as List;
+    final data = await _loadMockData();
+    final items = data['playlists'] as List;
+    
+    // Convert directly since our mock maps exactly to our models
     return items
         .whereType<Map<String, dynamic>>()
-        .map(Playlist.fromSpotify)
+        .map((json) => Playlist.fromJson(json))
         .toList();
   }
 
-  /// Fetch all tracks in a playlist.
-  Future<List<Track>> fetchPlaylistTracks(String playlistId,
-      {int limit = 50}) async {
-    final opts = await _authHeaders();
-    final res = await dio.get(
-      '${ApiConstants.spotifyBaseUrl}/playlists/$playlistId/tracks',
-      queryParameters: {'limit': limit, 'fields': 'items(track)'},
-      options: opts,
+  /// Fetch all tracks in a playlist from local mock.
+  Future<List<Track>> fetchPlaylistTracks(String playlistId, {int limit = 50}) async {
+    final data = await _loadMockData();
+    final items = data['playlists'] as List;
+    
+    final playlist = items.firstWhere(
+      (p) => p['id'] == playlistId, 
+      orElse: () => null,
     );
-    final items = res.data['items'] as List;
-    return items
+    
+    if (playlist == null) return [];
+    
+    final tracks = playlist['tracks'] as List;
+    return tracks
         .whereType<Map<String, dynamic>>()
-        .map((item) => item['track'] as Map<String, dynamic>?)
-        .whereType<Map<String, dynamic>>()
-        .map(Track.fromSpotify)
+        .map((json) => Track.fromJson(json))
         .toList();
   }
 
-  // ── Search ──────────────────────────────────────────────────────────────────
-
-  /// Search for tracks by query string.
+  /// Search for tracks by query string using local mock data filtering.
   Future<List<Track>> searchTracks(String query, {int limit = 20}) async {
     if (query.trim().isEmpty) return [];
-    final opts = await _authHeaders();
-    final res = await dio.get(
-      '${ApiConstants.spotifyBaseUrl}/search',
-      queryParameters: {
-        'q': query,
-        'type': 'track',
-        'limit': limit,
-      },
-      options: opts,
-    );
-    final items = res.data['tracks']['items'] as List;
-    return items
-        .whereType<Map<String, dynamic>>()
-        .map(Track.fromSpotify)
-        .toList();
+    
+    final data = await _loadMockData();
+    final allTracks = <Track>[];
+    
+    for (final pl in (data['playlists'] as List)) {
+      for (final tr in (pl['tracks'] as List)) {
+        allTracks.add(Track.fromJson(tr));
+      }
+    }
+    
+    final q = query.toLowerCase();
+    return allTracks.where((t) {
+      return t.title.toLowerCase().contains(q) || t.artist.toLowerCase().contains(q);
+    }).take(limit).toList();
   }
 
-  // ── Artist ──────────────────────────────────────────────────────────────────
-
-  /// Fetch top tracks for an artist (used for related content).
+  /// Fetch top tracks for an artist from local mock (just a simple filter).
   Future<List<Track>> fetchArtistTopTracks(String artistId) async {
-    final opts = await _authHeaders();
-    final res = await dio.get(
-      '${ApiConstants.spotifyBaseUrl}/artists/$artistId/top-tracks',
-      queryParameters: {'market': 'US'},
-      options: opts,
-    );
-    final items = res.data['tracks'] as List;
-    return items
-        .whereType<Map<String, dynamic>>()
-        .map(Track.fromSpotify)
-        .toList();
+    return searchTracks(artistId); // Quick fake implementation for mock
   }
 }
