@@ -27,12 +27,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Package Python Engine
-        run: |
-          pip install serious-python
-          mkdir -p assets/python
-          serious_python package python_engine -o assets/python/engine.zip
-
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -41,6 +35,11 @@ jobs:
 
       - name: Install Flutter Dependencies
         run: flutter pub get
+
+      - name: Package Python Engine
+        run: |
+          mkdir -p assets/python
+          dart run serious_python:main package python_engine/ --asset assets/python/engine.zip -p Android
 
       - name: Run Build Runner (Code Generation)
         run: dart run build_runner build --delete-conflicting-outputs
