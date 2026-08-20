@@ -32,7 +32,7 @@ dependencies:
   cached_network_image: ^3.3.1
 
   # --- Sliding Panel ---
-  sliding_up_panel2: ^2.0.0+2
+  sliding_up_panel2: any
 
   # --- Local Persistence ---
   hive_flutter: ^1.1.0
