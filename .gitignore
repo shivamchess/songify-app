@@ -1,0 +1,40 @@
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+pubspec.lock
+
+# Generated files
+lib/**/*.g.dart
+lib/**/*.freezed.dart
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+python_engine/.venv/
+python_engine/venv/
+
+# Secrets (NEVER commit these)
+lib/core/constants/api_constants.dart
+
+# Android
+android/local.properties
+android/.gradle/
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+
+# Assets bundle (generated)
+assets/python/engine.zip
