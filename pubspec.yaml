@@ -25,7 +25,7 @@ dependencies:
   just_audio_background: ^0.0.1-beta.12
 
   # --- Python Bridge ---
-  serious_python: ^0.5.1
+  serious_python: any
 
   # --- Networking / Spotify ---
   dio: ^5.4.3+1
