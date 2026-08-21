@@ -37,11 +37,15 @@ jobs:
       - name: Cache pub dependencies
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.pub-cache
+          path: ~/.pub-cache
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pub-
+          restore-keys: ${{ runner.os }}-pub-
+
+      - name: Generate Android native project
+        run: |
+          # flutter create scaffolds the missing android/ directory.
+          # It won't overwrite existing lib/ or pubspec.yaml files.
+          flutter create --project-name songify --org com.songify --platforms android .
 
       - name: Install Flutter Dependencies
         run: flutter pub get
