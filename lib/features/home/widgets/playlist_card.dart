@@ -83,7 +83,7 @@ class _PlaylistCardState extends State<PlaylistCard>
                   color: AppColors.surfaceElevated,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.4),
+                      color: Colors.black.withOpacity(0.4),
                       blurRadius: 16,
                       offset: const Offset(0, 8),
                     ),
@@ -131,3 +131,4 @@ class _PlaylistCardState extends State<PlaylistCard>
     );
   }
 }
+

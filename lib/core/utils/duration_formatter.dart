@@ -6,3 +6,4 @@ extension DurationFormatter on Duration {
     return '$m:$s';
   }
 }
+

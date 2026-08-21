@@ -51,3 +51,4 @@ GoRouter appRouter(Ref ref) {
     ],
   );
 }
+

@@ -42,3 +42,4 @@ class Track with _$Track {
     albumArtSmall: '',
   );
 }
+

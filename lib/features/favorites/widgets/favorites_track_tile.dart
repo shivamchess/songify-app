@@ -21,7 +21,7 @@ class FavoritesTrackTile extends StatelessWidget {
       background: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 24),
-        color: AppColors.error.withValues(alpha: 0.15),
+        color: AppColors.error.withOpacity(0.15),
         child: const Icon(
           Icons.delete_outline_rounded,
           color: AppColors.error,
@@ -58,3 +58,4 @@ class FavoritesTrackTile extends StatelessWidget {
     );
   }
 }
+

@@ -156,3 +156,4 @@ class _ElasticThumbShape extends SliderComponentShape {
     );
   }
 }
+

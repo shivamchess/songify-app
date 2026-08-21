@@ -27,3 +27,4 @@ class FeaturedPlaylistsSection extends StatelessWidget {
     );
   }
 }
+

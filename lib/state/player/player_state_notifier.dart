@@ -164,3 +164,4 @@ class PlayerStateNotifier extends _$PlayerStateNotifier {
 
 @riverpod
 PlayerState playerState(Ref ref) => ref.watch(playerStateNotifierProvider);
+

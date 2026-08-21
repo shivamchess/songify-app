@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/theme/app_colors.dart';
 
@@ -6,7 +6,7 @@ import '../../../core/theme/app_colors.dart';
 ///
 /// Uses [AnimatedSwitcher] so that when [artUrl] changes:
 ///   - Old artwork scales down (0.9) and fades out
-///   - New artwork bounces in from scale 0.7 → 1.05 → 1.0 (elasticOut)
+///   - New artwork bounces in from scale 0.7 ? 1.05 ? 1.0 (elasticOut)
 ///
 /// The artwork sits inside a heavy shadow for depth.
 class AlbumArtSwitcher extends StatelessWidget {
@@ -79,12 +79,12 @@ class _ArtworkImage extends StatelessWidget {
         color: AppColors.surfaceElevated,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.55),
+            color: Colors.black.withOpacity(0.55),
             blurRadius: 40,
             offset: const Offset(0, 20),
           ),
           BoxShadow(
-            color: AppColors.accent.withValues(alpha: 0.12),
+            color: AppColors.accent.withOpacity(0.12),
             blurRadius: 60,
             offset: const Offset(0, 10),
           ),
@@ -122,3 +122,4 @@ class _ArtworkPlaceholder extends StatelessWidget {
     );
   }
 }
+

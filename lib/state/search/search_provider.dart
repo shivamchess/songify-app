@@ -23,3 +23,4 @@ Future<List<Track>> searchSuggestions(Ref ref) async {
   final api = ref.read(searchServiceProvider);
   return api.fetchSearchSuggestions(query);
 }
+

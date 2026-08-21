@@ -103,7 +103,7 @@ class _BackButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.black.withValues(alpha: 0.4),
+          color: Colors.black.withOpacity(0.4),
           shape: BoxShape.circle,
         ),
         child: const Icon(Icons.arrow_back_ios_new_rounded,
@@ -112,3 +112,4 @@ class _BackButton extends StatelessWidget {
     );
   }
 }
+

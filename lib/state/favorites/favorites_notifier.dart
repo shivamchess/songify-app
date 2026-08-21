@@ -41,3 +41,4 @@ class Favorites extends _$Favorites {
 
   bool isFavorite(String trackId) => state.contains(trackId);
 }
+

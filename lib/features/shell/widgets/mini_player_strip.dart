@@ -27,12 +27,12 @@ class MiniPlayerStrip extends ConsumerWidget {
           color: AppColors.surfaceElevated,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: AppColors.accent.withValues(alpha: 0.15), 
+            color: AppColors.accent.withOpacity(0.15), 
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.accent.withValues(alpha: 0.1),
+              color: AppColors.accent.withOpacity(0.1),
               blurRadius: 20,
               offset: const Offset(0, 4),
             ),
@@ -118,3 +118,4 @@ class MiniPlayerStrip extends ConsumerWidget {
     );
   }
 }
+

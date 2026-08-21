@@ -14,3 +14,4 @@ class AudioStream with _$AudioStream {
   factory AudioStream.fromJson(Map<String, dynamic> json) =>
       _$AudioStreamFromJson(json);
 }
+

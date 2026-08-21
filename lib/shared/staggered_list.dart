@@ -50,3 +50,4 @@ class StaggeredList extends StatelessWidget {
     );
   }
 }
+

@@ -109,3 +109,4 @@ class _JuicySearchBarState extends State<JuicySearchBar>
     );
   }
 }
+

@@ -134,3 +134,4 @@ class _BouncyPlayPauseButtonState extends State<BouncyPlayPauseButton>
     );
   }
 }
+

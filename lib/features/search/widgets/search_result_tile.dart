@@ -65,3 +65,4 @@ class SearchResultTile extends StatelessWidget {
     );
   }
 }
+

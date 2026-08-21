@@ -94,3 +94,4 @@ class _JuicyIconButtonState extends State<JuicyIconButton>
     return button;
   }
 }
+

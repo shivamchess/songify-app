@@ -65,3 +65,4 @@ class FavoritesScreen extends ConsumerWidget {
     );
   }
 }
+

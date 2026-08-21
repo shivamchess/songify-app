@@ -29,3 +29,4 @@ class SongifyApp extends ConsumerWidget {
     );
   }
 }
+

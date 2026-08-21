@@ -38,15 +38,15 @@ class SearchSuggestionsDropdown extends ConsumerWidget {
                   child: Container(
                     constraints: const BoxConstraints(maxHeight: 350),
                     decoration: BoxDecoration(
-                      color: AppColors.surfaceElevated.withValues(alpha: 0.8),
+                      color: AppColors.surfaceElevated.withOpacity(0.8),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: AppColors.accent.withValues(alpha: 0.2),
+                        color: AppColors.accent.withOpacity(0.2),
                         width: 1,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.5),
+                          color: Colors.black.withOpacity(0.5),
                           blurRadius: 24,
                           offset: const Offset(0, 12),
                         ),
@@ -63,7 +63,7 @@ class SearchSuggestionsDropdown extends ConsumerWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
                           'Error loading suggestions',
-                          style: TextStyle(color: AppColors.error.withValues(alpha: 0.8)),
+                          style: TextStyle(color: AppColors.error.withOpacity(0.8)),
                         ),
                       ),
                       data: (tracks) {
@@ -85,7 +85,7 @@ class SearchSuggestionsDropdown extends ConsumerWidget {
                           physics: const BouncingScrollPhysics(),
                           itemCount: tracks.length,
                           separatorBuilder: (_, __) => Divider(
-                            color: AppColors.divider.withValues(alpha: 0.5),
+                            color: AppColors.divider.withOpacity(0.5),
                             height: 1,
                             indent: 20,
                             endIndent: 20,
@@ -221,3 +221,4 @@ class _SuggestionItemTileState extends State<_SuggestionItemTile> with SingleTic
     );
   }
 }
+

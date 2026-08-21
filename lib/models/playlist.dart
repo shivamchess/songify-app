@@ -31,3 +31,4 @@ class Playlist with _$Playlist {
     );
   }
 }
+

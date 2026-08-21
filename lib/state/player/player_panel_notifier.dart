@@ -17,3 +17,4 @@ class PlayerPanelNotifier extends _$PlayerPanelNotifier {
   void close() => state.close();
   bool get isOpen => state.isPanelOpen;
 }
+

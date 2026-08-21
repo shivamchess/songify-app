@@ -19,3 +19,4 @@ Future<List<Track>> playlistTracks(Ref ref, String playlistId) async {
   final api = ref.read(spotifyApiServiceProvider);
   return api.fetchPlaylistTracks(playlistId);
 }
+
