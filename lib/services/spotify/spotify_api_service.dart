@@ -48,24 +48,60 @@ class SpotifyApiService {
   }
 
   Future<List<Playlist>> fetchFeaturedPlaylists({int limit = 4}) async {
-    final genres = ['Top Hits', 'Synthwave', 'Lofi Hip Hop', 'Workout', 'Acoustic'];
-    genres.shuffle();
+    // 1. Fetch exact mockup songs for the "Trending" and "Made for You" sections
+    final queries = [
+      'Baarishein Anuv Jain',
+      'Jhoom Ali Sethi',
+      'Heeriye Arijit Singh',
+      'Lofi Sunset',
+      'Dreaming Leavv',
+      'Moonlit Idealism'
+    ];
+    
     final playlists = <Playlist>[];
-    for (var i = 0; i < limit; i++) {
-      final genre = genres[i];
-      final tracks = await searchTracks(genre, limit: 15);
-      if (tracks.isNotEmpty) {
-        playlists.add(Playlist(
-          id: 'pl_itunes_$i',
-          name: genre,
-          description: 'Dynamic $genre playlist.',
-          coverUrl: tracks.first.albumArtUrl,
-          ownerName: 'Songify AI',
-          totalTracks: tracks.length,
-          tracks: tracks,
-        ));
-      }
+    
+    // Create a special "Trending" playlist that HomeScreen will use
+    final trendingTracks = <Track>[];
+    for (final q in queries) {
+      final res = await searchTracks(q, limit: 1);
+      if (res.isNotEmpty) trendingTracks.add(res.first);
     }
+    
+    // Add Daily Juice
+    playlists.add(Playlist(
+      id: 'mock_pl_1',
+      name: 'Daily Juice',
+      description: 'Your daily picks',
+      coverUrl: trendingTracks.isNotEmpty ? trendingTracks.first.albumArtUrl : '',
+      ownerName: 'JUICY',
+      totalTracks: trendingTracks.length,
+      tracks: trendingTracks,
+    ));
+
+    // Add Night Drive
+    final synthwave = await searchTracks('Synthwave', limit: 15);
+    playlists.add(Playlist(
+      id: 'mock_pl_2',
+      name: 'Night Drive',
+      description: 'Synthwave vibes',
+      coverUrl: synthwave.isNotEmpty ? synthwave.first.albumArtUrl : '',
+      ownerName: 'JUICY',
+      totalTracks: synthwave.length,
+      tracks: synthwave,
+    ));
+
+    // Add Lofi Beats
+    final lofi = await searchTracks('Lofi Beats', limit: 15);
+    playlists.add(Playlist(
+      id: 'mock_pl_3',
+      name: 'Lofi Beats',
+      description: '85 songs',
+      coverUrl: lofi.isNotEmpty ? lofi.first.albumArtUrl : '',
+      ownerName: 'JUICY',
+      totalTracks: lofi.length,
+      tracks: lofi,
+    ));
+
     return playlists;
   }
 
