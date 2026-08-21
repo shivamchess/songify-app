@@ -112,7 +112,7 @@ class _PanelContent extends StatelessWidget {
             position: playerState.position,
             duration: Duration(milliseconds: track.durationMs),
             onSeek: (pos) =>
-                ref.read(playerStateProvider.notifier).seekTo(pos),
+                ref.read(playerStateNotifierProvider.notifier).seekTo(pos),
           ),
         ),
 
@@ -165,7 +165,7 @@ class _PlaybackControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = ref.read(playerStateProvider.notifier);
+    final notifier = ref.read(playerStateNotifierProvider.notifier);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

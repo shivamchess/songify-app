@@ -68,7 +68,7 @@ class _JuicySearchBarState extends State<JuicySearchBar>
             ),
             boxShadow: [
               BoxShadow(
-                color: AppColors.accent.withValues(alpha: _glowAnim.value * 0.2),
+                color: AppColors.accent.withOpacity(_glowAnim.value * 0.2),
                 blurRadius: 16 * _glowAnim.value,
                 spreadRadius: 2 * _glowAnim.value,
               ),
@@ -109,4 +109,5 @@ class _JuicySearchBarState extends State<JuicySearchBar>
     );
   }
 }
+
 

@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../core/constants/api_constants.dart';
 import '../../models/track.dart';
 import '../../models/audio_stream.dart';
-import '../../core/constants/api_constants.dart';
 
 part 'python_bridge_service.g.dart';
 

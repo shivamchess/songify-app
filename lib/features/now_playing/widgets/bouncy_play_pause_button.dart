@@ -108,7 +108,7 @@ class _BouncyPlayPauseButtonState extends State<BouncyPlayPauseButton>
             // Glowing shadow that pulses when playing
             boxShadow: [
               BoxShadow(
-                color: bg.withValues(alpha: widget.isPlaying ? 0.55 : 0.25),
+                color: bg.withOpacity(widget.isPlaying ? 0.55 : 0.25),
                 blurRadius: widget.isPlaying ? 28 : 12,
                 spreadRadius: widget.isPlaying ? 4 : 1,
               ),

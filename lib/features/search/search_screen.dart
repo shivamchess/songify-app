@@ -40,7 +40,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           elevation: 0,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-            onTap: () {}, // Can hook into go_router if needed
+            onPressed: () {},
           ),
           title: const Text(
             'Search',
