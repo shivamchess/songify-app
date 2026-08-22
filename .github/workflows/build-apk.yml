@@ -43,9 +43,18 @@ jobs:
 
       - name: Generate Android native project
         run: |
-          # flutter create scaffolds the missing android/ directory.
-          # It won't overwrite existing lib/ or pubspec.yaml files.
           flutter create --project-name songify --org com.songify --platforms android .
+
+      - name: Patch AndroidManifest.xml
+        run: |
+          MANIFEST="android/app/src/main/AndroidManifest.xml"
+          # Ensure INTERNET permission exists
+          if ! grep -q 'android.permission.INTERNET' "$MANIFEST"; then
+            sed -i 's|<manifest |<manifest xmlns:tools="http://schemas.android.com/tools" |' "$MANIFEST"
+            sed -i '/<application/i\    <uses-permission android:name="android.permission.INTERNET"/>' "$MANIFEST"
+          fi
+          # Set app label to JUICY
+          sed -i 's|android:label="songify"|android:label="JUICY"|g' "$MANIFEST"
 
       - name: Install Flutter Dependencies
         run: flutter pub get
