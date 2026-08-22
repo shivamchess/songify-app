@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import '../../models/track.dart';
 
 part 'player_state_notifier.g.dart';
@@ -115,7 +116,17 @@ class PlayerStateNotifier extends _$PlayerStateNotifier {
     }
 
     try {
-      await _player.setUrl(track.previewUrl);
+      final audioSource = AudioSource.uri(
+        Uri.parse(track.previewUrl),
+        tag: MediaItem(
+          id: track.id,
+          album: track.albumName,
+          title: track.title,
+          artist: track.artist,
+          artUri: track.albumArtUrl.isNotEmpty ? Uri.parse(track.albumArtUrl) : null,
+        ),
+      );
+      await _player.setAudioSource(audioSource);
       await _player.play();
       state = state.copyWith(isLoading: false, isPlaying: true);
     } catch (e) {

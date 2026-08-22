@@ -48,11 +48,13 @@ jobs:
       - name: Patch AndroidManifest.xml
         run: |
           MANIFEST="android/app/src/main/AndroidManifest.xml"
-          # Ensure INTERNET permission exists
-          if ! grep -q 'android.permission.INTERNET' "$MANIFEST"; then
-            sed -i 's|<manifest |<manifest xmlns:tools="http://schemas.android.com/tools" |' "$MANIFEST"
-            sed -i '/<application/i\    <uses-permission android:name="android.permission.INTERNET"/>' "$MANIFEST"
-          fi
+          # Add permissions for internet and audio background
+          sed -i 's|<manifest |<manifest xmlns:tools="http://schemas.android.com/tools" |' "$MANIFEST"
+          sed -i '/<application/i\    <uses-permission android:name="android.permission.INTERNET"/>\n    <uses-permission android:name="android.permission.WAKE_LOCK"/>\n    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>\n    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>' "$MANIFEST"
+          # Change Activity to AudioServiceActivity
+          sed -i 's|android:name=".MainActivity"|android:name="com.ryanheise.audioservice.AudioServiceActivity"|g' "$MANIFEST"
+          # Inject service and receiver for just_audio_background
+          sed -i '/<\/application>/i \        <service android:name="com.ryanheise.audioservice.AudioService"\n            android:foregroundServiceType="mediaPlayback"\n            android:exported="true">\n            <intent-filter>\n                <action android:name="android.media.browse.MediaBrowserService" />\n            </intent-filter>\n        </service>\n\n        <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver"\n            android:exported="true">\n            <intent-filter>\n                <action android:name="android.intent.action.MEDIA_BUTTON" />\n            </intent-filter>\n        </receiver>' "$MANIFEST"
           # Set app label to JUICY
           sed -i 's|android:label="songify"|android:label="JUICY"|g' "$MANIFEST"
 
