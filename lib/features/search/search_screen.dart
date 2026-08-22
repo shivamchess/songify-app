@@ -75,7 +75,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         ? IconButton(
                             onPressed: () { _ctrl.clear(); setState(() => _results = []); },
                             icon: const Icon(Icons.close_rounded, color: AppColors.textMuted, size: 18),
-                            splashFactory: NoSplash.splashFactory,
                           )
                         : null,
                     border: InputBorder.none,
@@ -165,7 +164,6 @@ class _ResultTile extends ConsumerWidget {
     final isFav = ref.watch(favoritesProvider).contains(track.id);
     return InkWell(
       onTap: () => ref.read(playerStateNotifierProvider.notifier).playTrack(track),
-      splashFactory: NoSplash.splashFactory,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         child: Row(children: [

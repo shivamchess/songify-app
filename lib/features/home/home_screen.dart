@@ -249,7 +249,6 @@ class _TrendingTile extends ConsumerWidget {
     final isFav = w.watch(favoritesProvider).contains(track.id);
     return InkWell(
       onTap: () => ref.read(playerStateNotifierProvider.notifier).playTrack(track),
-      splashFactory: NoSplash.splashFactory,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
         child: Row(children: [
@@ -332,7 +331,6 @@ class _IconBtn extends StatelessWidget {
   Widget build(BuildContext context) => IconButton(
     onPressed: onTap,
     icon: Icon(icon, color: AppColors.textSecondary, size: 24),
-    splashFactory: NoSplash.splashFactory,
   );
 }
 

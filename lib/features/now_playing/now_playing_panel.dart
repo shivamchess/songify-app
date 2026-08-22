@@ -66,7 +66,6 @@ class NowPlayingPanel extends ConsumerWidget {
                       IconButton(
                         onPressed: () => Navigator.pop(context),
                         icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.textPrimary, size: 30),
-                        splashFactory: NoSplash.splashFactory,
                       ),
                       Expanded(child: Column(children: [
                         Text('PLAYING FROM', style: TextStyle(fontSize: 10, color: Colors.white.withOpacity(0.5), letterSpacing: 2)),
@@ -78,7 +77,6 @@ class NowPlayingPanel extends ConsumerWidget {
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.more_horiz_rounded, color: AppColors.textPrimary, size: 24),
-                        splashFactory: NoSplash.splashFactory,
                       ),
                     ],
                   ),
