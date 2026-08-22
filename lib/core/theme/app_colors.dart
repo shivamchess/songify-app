@@ -1,32 +1,44 @@
 import 'package:flutter/material.dart';
 
-/// JUICY color system — deep black + neon purple from mockup.
+/// JUICY — Juicy Lofi Aesthetic color system.
 abstract final class AppColors {
-  // --- Background ---
-  static const Color background = Color(0xFF070709);
-  static const Color surface = Color(0xFF0D0D12);
-  static const Color surfaceElevated = Color(0xFF1A1A24);
+  // --- Backgrounds ---
+  static const Color background     = Color(0xFF08081A);  // Deep navy black
+  static const Color surface        = Color(0xFF0F0F28);  // Card surface
+  static const Color surfaceElevated= Color(0xFF181836);  // Elevated card
 
-  // --- Accent (Neon Purple) ---
-  static const Color accent = Color(0xFFA724FF);
-  static const Color accentSoft = Color(0xFFC77DFF);
-  static const Color accentGlow = Color(0x33A724FF);
+  // --- Primary Accent (Violet) ---
+  static const Color accent         = Color(0xFF7C3AED);
+  static const Color accentSoft     = Color(0xFFA78BFA);
+  static const Color accentGlow     = Color(0x447C3AED);
+
+  // --- Warm Secondary (for "corny" feel) ---
+  static const Color warm           = Color(0xFFF59E0B);  // Amber
+  static const Color pink           = Color(0xFFEC4899);  // Pink for liked
 
   // --- Text ---
-  static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFF9090A8);
-  static const Color textMuted = Color(0xFF5A5A72);
+  static const Color textPrimary    = Color(0xFFF0F0FF);
+  static const Color textSecondary  = Color(0xFF8888AA);
+  static const Color textMuted      = Color(0xFF444466);
 
-  // --- Controls ---
-  static const Color divider = Color(0xFF2A2A38);
-  static const Color iconDefault = Color(0xFF7070A0);
-  static const Color iconActive = Color(0xFFFFFFFF);
+  // --- UI ---
+  static const Color divider        = Color(0xFF1E1E40);
+  static const Color iconDefault    = Color(0xFF6666AA);
+  static const Color iconActive     = Color(0xFFFFFFFF);
 
   // --- Semantic ---
-  static const Color success = Color(0xFF4ECCA3);
-  static const Color error = Color(0xFFFF6B6B);
+  static const Color success        = Color(0xFF34D399);
+  static const Color error          = Color(0xFFFF6B6B);
 
   // --- Glass ---
-  static const Color glassFill = Color(0x1AFFFFFF);
-  static const Color glassBorder = Color(0x26FFFFFF);
+  static const Color glassFill      = Color(0x14FFFFFF);
+  static const Color glassBorder    = Color(0x20FFFFFF);
+
+  // --- Gradients ---
+  static const LinearGradient primaryGradient = LinearGradient(
+    colors: [Color(0xFF7C3AED), Color(0xFFEC4899)],
+  );
+  static const LinearGradient warmGradient = LinearGradient(
+    colors: [Color(0xFFF59E0B), Color(0xFFEF4444)],
+  );
 }

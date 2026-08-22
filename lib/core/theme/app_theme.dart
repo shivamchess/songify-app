@@ -8,6 +8,9 @@ abstract final class AppTheme {
     final base = ThemeData.dark(useMaterial3: true);
     return base.copyWith(
       scaffoldBackgroundColor: AppColors.background,
+      splashFactory: NoSplash.splashFactory,
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
       colorScheme: const ColorScheme.dark(
         brightness: Brightness.dark,
         primary: AppColors.accent,
@@ -17,61 +20,27 @@ abstract final class AppTheme {
         onSurface: AppColors.textPrimary,
         error: AppColors.error,
       ),
-      textTheme: GoogleFonts.dmSansTextTheme(
-        base.textTheme.copyWith(
-          displayLarge: const TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
-            letterSpacing: -1.2,
-          ),
-          titleLarge: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
-            letterSpacing: -0.5,
-          ),
-          titleMedium: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
-          ),
-          bodyMedium: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: AppColors.textSecondary,
-          ),
-          labelSmall: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w500,
-            color: AppColors.textMuted,
-            letterSpacing: 0.5,
-          ),
-        ),
+      textTheme: GoogleFonts.spaceGroteskTextTheme(base.textTheme).copyWith(
+        displayLarge: GoogleFonts.spaceGrotesk(fontSize: 32, fontWeight: FontWeight.w800, color: AppColors.textPrimary, letterSpacing: -1.0),
+        titleLarge:   GoogleFonts.spaceGrotesk(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+        titleMedium:  GoogleFonts.spaceGrotesk(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+        bodyMedium:   GoogleFonts.spaceGrotesk(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondary),
+        labelSmall:   GoogleFonts.spaceGrotesk(fontSize: 11, fontWeight: FontWeight.w500, color: AppColors.textMuted, letterSpacing: 0.5),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: AppColors.background,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.dark,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: Color(0xFF08081A),
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
+        titleTextStyle: GoogleFonts.spaceGrotesk(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.transparent,
-        selectedItemColor: AppColors.accent,
-        unselectedItemColor: AppColors.iconDefault,
-        elevation: 0,
-        type: BottomNavigationBarType.fixed,
-      ),
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        },
-      ),
+      iconTheme: const IconThemeData(color: AppColors.iconDefault),
+      dividerColor: AppColors.divider,
     );
   }
 }
-

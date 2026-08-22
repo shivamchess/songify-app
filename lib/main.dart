@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.songify.channel.audio',
+    androidNotificationChannelName: 'JUICY Music',
+    androidNotificationOngoing: true,
+    androidShowNotificationBadge: true,
+  );
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarColor: Color(0xFF08081A),
     systemNavigationBarIconBrightness: Brightness.light,
   ));
 
