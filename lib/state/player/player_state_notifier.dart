@@ -100,7 +100,7 @@ class PlayerStateNotifier extends _$PlayerStateNotifier {
   Future<void> playTrack(Track track, {List<Track>? queue, int index = 0}) async {
     state = state.copyWith(
       currentTrack: track,
-      queue: queue ?? state.queue.isEmpty ? [track] : state.queue,
+      queue: queue ?? (state.queue.isEmpty ? [track] : state.queue),
       currentIndex: index,
       isLoading: true,
       error: null,
