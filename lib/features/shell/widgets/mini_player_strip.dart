@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../state/player/player_state_notifier.dart';
 
-import '../now_playing/now_playing_panel.dart';
+import '../../now_playing/now_playing_panel.dart';
 
 class MiniPlayerStrip extends ConsumerWidget {
   const MiniPlayerStrip({super.key});
