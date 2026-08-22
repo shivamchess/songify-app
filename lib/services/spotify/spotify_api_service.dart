@@ -24,13 +24,15 @@ class SpotifyApiService {
   Track _mapTrack(Map<String, dynamic> item) {
     final artUrl = (item['artworkUrl100'] as String? ?? '');
     return Track(
-      id: item['trackId']?.toString() ?? '${item['trackName']}${item['artistName']}',
+      id: item['trackId']?.toString() ??
+          '${item['trackName']}${item['artistName']}',
       title: item['trackName'] as String? ?? 'Unknown',
       artist: item['artistName'] as String? ?? 'Unknown',
       albumName: item['collectionName'] as String? ?? '',
       albumArtUrl: artUrl.replaceAll('100x100bb', '600x600bb'),
       albumArtSmall: artUrl,
       durationMs: item['trackTimeMillis'] as int? ?? 0,
+      previewUrl: item['previewUrl'] as String? ?? '',
     );
   }
 

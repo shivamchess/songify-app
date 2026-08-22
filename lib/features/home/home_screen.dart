@@ -88,7 +88,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   }
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (ctx, i) => _TrendingTile(track: tracks[i], index: i + 1, ref: ref),
+                      (ctx, i) => _TrendingTile(
+                        track: tracks[i],
+                        index: i + 1,
+                        ref: ref,
+                        queue: tracks,
+                        queueIndex: i,
+                      ),
                       childCount: tracks.length.clamp(0, 15),
                     ),
                   );
@@ -239,16 +245,25 @@ class _PlaylistCard extends StatelessWidget {
 // ── Trending tile ──────────────────────────────────────────────────────────
 
 class _TrendingTile extends ConsumerWidget {
-  const _TrendingTile({required this.track, required this.index, required this.ref});
+  const _TrendingTile({
+    required this.track,
+    required this.index,
+    required this.ref,
+    required this.queue,
+    required this.queueIndex,
+  });
   final Track track;
   final int index;
   final WidgetRef ref;
+  final List<Track> queue;
+  final int queueIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef w) {
     final isFav = w.watch(favoritesProvider).contains(track.id);
     return InkWell(
-      onTap: () => ref.read(playerStateNotifierProvider.notifier).playTrack(track),
+      onTap: () => ref.read(playerStateNotifierProvider.notifier)
+          .playTrack(track, queue: queue, index: queueIndex),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
         child: Row(children: [

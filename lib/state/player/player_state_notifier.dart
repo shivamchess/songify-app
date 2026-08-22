@@ -2,11 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../models/track.dart';
-import '../../services/python_bridge/python_bridge_service.dart';
 
 part 'player_state_notifier.g.dart';
 
-// ── State model ──────────────────────────────────────────────────────────────
+// ── State model ───────────────────────────────────────────────────────────────
 
 class PlayerState {
   const PlayerState({
@@ -63,54 +62,61 @@ class PlayerState {
   }
 }
 
-// ── Notifier ────────────────────────────────────────────────────────────────
+// ── Notifier ──────────────────────────────────────────────────────────────────
 
 @riverpod
 class PlayerStateNotifier extends _$PlayerStateNotifier {
-  late final AudioPlayer _audioPlayer;
-  late final PythonBridgeService _bridge;
+  late final AudioPlayer _player;
 
   @override
   PlayerState build() {
-    _audioPlayer = AudioPlayer();
-    _bridge = ref.read(pythonBridgeServiceProvider);
+    _player = AudioPlayer();
 
-    // Sync position tick
-    _audioPlayer.positionStream.listen((pos) {
+    _player.positionStream.listen((pos) {
       state = state.copyWith(position: pos);
     });
 
-    // Sync playing state
-    _audioPlayer.playingStream.listen((playing) {
+    _player.playingStream.listen((playing) {
       state = state.copyWith(isPlaying: playing);
     });
 
-    // Auto-advance on track complete
-    _audioPlayer.processingStateStream.listen((ps) {
-      if (ps == ProcessingState.completed) next();
+    _player.processingStateStream.listen((ps) {
+      if (ps == ProcessingState.completed) {
+        if (state.isRepeat) {
+          _player.seek(Duration.zero);
+          _player.play();
+        } else {
+          next();
+        }
+      }
     });
 
-    ref.onDispose(() {
-      _audioPlayer.dispose();
-    });
+    ref.onDispose(() => _player.dispose());
 
     return const PlayerState();
   }
 
-  /// Play a single track — resolves stream URL via Python bridge first.
+  /// Play a track using its iTunes previewUrl (free 30-sec MP3).
   Future<void> playTrack(Track track, {List<Track>? queue, int index = 0}) async {
     state = state.copyWith(
       currentTrack: track,
-      queue: queue ?? [track],
+      queue: queue ?? state.queue.isEmpty ? [track] : state.queue,
       currentIndex: index,
       isLoading: true,
       error: null,
     );
 
+    if (track.previewUrl.isEmpty) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'No preview available for this track',
+      );
+      return;
+    }
+
     try {
-      final stream = await _bridge.resolveStream(track);
-      await _audioPlayer.setUrl(stream.url);
-      await _audioPlayer.play();
+      await _player.setUrl(track.previewUrl);
+      await _player.play();
       state = state.copyWith(isLoading: false, isPlaying: true);
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
@@ -119,49 +125,45 @@ class PlayerStateNotifier extends _$PlayerStateNotifier {
 
   void togglePlayPause() {
     if (state.isPlaying) {
-      _audioPlayer.pause();
+      _player.pause();
     } else {
-      _audioPlayer.play();
+      _player.play();
     }
   }
 
   Future<void> next() async {
     if (state.queue.isEmpty) return;
-    final nextIndex = (state.currentIndex + 1) % state.queue.length;
-    await playTrack(
-      state.queue[nextIndex],
-      queue: state.queue,
-      index: nextIndex,
-    );
+    int nextIndex;
+    if (state.isShuffle) {
+      final indices = List.generate(state.queue.length, (i) => i)
+        ..remove(state.currentIndex);
+      if (indices.isEmpty) return;
+      indices.shuffle();
+      nextIndex = indices.first;
+    } else {
+      nextIndex = (state.currentIndex + 1) % state.queue.length;
+    }
+    await playTrack(state.queue[nextIndex], queue: state.queue, index: nextIndex);
   }
 
   Future<void> previous() async {
     if (state.queue.isEmpty) return;
-    // If >3s in, restart current track; else go previous
     if (state.position.inSeconds > 3) {
-      await _audioPlayer.seek(Duration.zero);
+      await _player.seek(Duration.zero);
       return;
     }
     final prevIndex =
         (state.currentIndex - 1 + state.queue.length) % state.queue.length;
-    await playTrack(
-      state.queue[prevIndex],
-      queue: state.queue,
-      index: prevIndex,
-    );
+    await playTrack(state.queue[prevIndex], queue: state.queue, index: prevIndex);
   }
 
   Future<void> seekTo(Duration position) async {
-    await _audioPlayer.seek(position);
+    await _player.seek(position);
   }
 
-  void toggleShuffle() =>
-      state = state.copyWith(isShuffle: !state.isShuffle);
-
-  void toggleRepeat() =>
-      state = state.copyWith(isRepeat: !state.isRepeat);
+  void toggleShuffle() => state = state.copyWith(isShuffle: !state.isShuffle);
+  void toggleRepeat() => state = state.copyWith(isRepeat: !state.isRepeat);
 }
 
 @riverpod
 PlayerState playerState(Ref ref) => ref.watch(playerStateNotifierProvider);
-
